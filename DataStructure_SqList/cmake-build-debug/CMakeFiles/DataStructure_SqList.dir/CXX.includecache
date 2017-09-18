@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jaime/CLionProjects/DataStructure_SqList/SqList.cpp
+iostream
+-
+SqList.h
+/home/jaime/CLionProjects/DataStructure_SqList/SqList.h
+
+/home/jaime/CLionProjects/DataStructure_SqList/SqList.h
+
+/home/jaime/CLionProjects/DataStructure_SqList/main.cpp
+iostream
+-
+SqList.cpp
+/home/jaime/CLionProjects/DataStructure_SqList/SqList.cpp
+

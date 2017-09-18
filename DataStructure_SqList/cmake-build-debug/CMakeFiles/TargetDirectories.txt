@@ -1,0 +1,3 @@
+/home/jaime/CLionProjects/DataStructure_SqList/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/jaime/CLionProjects/DataStructure_SqList/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/jaime/CLionProjects/DataStructure_SqList/cmake-build-debug/CMakeFiles/DataStructure_SqList.dir

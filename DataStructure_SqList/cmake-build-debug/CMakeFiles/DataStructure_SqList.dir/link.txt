@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/DataStructure_SqList.dir/main.cpp.o CMakeFiles/DataStructure_SqList.dir/SqList.cpp.o  -o DataStructure_SqList 
