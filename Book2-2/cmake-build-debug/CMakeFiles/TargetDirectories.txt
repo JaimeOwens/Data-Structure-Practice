@@ -1,0 +1,3 @@
+/home/jaime/Data-Structure-Practice/Book2-2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/jaime/Data-Structure-Practice/Book2-2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/jaime/Data-Structure-Practice/Book2-2/cmake-build-debug/CMakeFiles/Book2_2.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Book2_5.dir/main.cpp.o CMakeFiles/Book2_5.dir/Answer.cpp.o  -o Book2_5 
