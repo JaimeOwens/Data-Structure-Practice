@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Data-Structure-Practice/DoubleLinkList/DoubleLinkList.cpp
+iostream
+-
+cstring
+-
+cstdlib
+-
+DoubleLinkList.h
+D:/Data-Structure-Practice/DoubleLinkList/DoubleLinkList.h
+
+D:/Data-Structure-Practice/DoubleLinkList/DoubleLinkList.h
+iostream
+-
+cstring
+-
+
+D:/Data-Structure-Practice/DoubleLinkList/main.cpp
+cstdio
+-
+cstdlib
+-
+iostream
+-
+DoubleLinkList.h
+D:/Data-Structure-Practice/DoubleLinkList/DoubleLinkList.h
+DoubleLinkList.cpp
+D:/Data-Structure-Practice/DoubleLinkList/DoubleLinkList.cpp
+
