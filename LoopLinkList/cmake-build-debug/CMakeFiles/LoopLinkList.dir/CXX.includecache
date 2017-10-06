@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Data-Structure-Practice/LoopLinkList/LoopLinkList.cpp
+iostream
+-
+cstdlib
+-
+cassert
+-
+LoopLinkList.h
+D:/Data-Structure-Practice/LoopLinkList/LoopLinkList.h
+
+D:/Data-Structure-Practice/LoopLinkList/LoopLinkList.h
+iostream
+-
+cstdio
+-
+
+D:/Data-Structure-Practice/LoopLinkList/main.cpp
+iostream
+-
+LoopLinkList.h
+D:/Data-Structure-Practice/LoopLinkList/LoopLinkList.h
+LoopLinkList.cpp
+D:/Data-Structure-Practice/LoopLinkList/LoopLinkList.cpp
+

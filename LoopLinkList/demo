@@ -1,0 +1,375 @@
+#ifndef CIRCULARLINKLIST_HPP_
+#define CIRCULARLINKLIST_HPP_
+// CircularLinkList类模板实现了循环链表
+template <typename DataType>
+class CircularLinkList
+{
+public:
+ struct Item
+ {
+  friend class CircularLinkList<DataType>;
+ public:
+  Item(const DataType & d, Item * pNext)
+   : m_data(d), m_pNext(pNext)
+  {}
+  DataType getData() const
+  {
+   return m_data;
+  }
+  Item * getNext() const
+  {
+   return m_pNext;
+  }
+  void setData(const DataType & d)
+  {
+   m_data = d;
+  }
+
+  // for debug
+  void setNext(Item * p)
+  {
+   m_pNext = p;
+  }
+ private:
+  DataType m_data;
+  Item * m_pNext;
+ };
+public:
+ typedef typename CircularLinkList<DataType> MyType;
+ typedef Item ItemType;
+public:
+ CircularLinkList()
+ {
+  m_pTail = NULL;
+ }
+ CircularLinkList(const CircularLinkList & rhs)
+ {
+  m_pTail = NULL;
+  copy(rhs);
+ }
+ CircularLinkList & operator=(const CircularLinkList & rhs)
+ {
+  if (this == &rhs)
+  {
+   return *this;
+  }
+  eraseAll();
+  copy(rhs);
+  return *this;
+ }
+ // 在头节点之前插入节点
+ void insertHead(const DataType & d)
+ {
+  Item * p = newItem(d);
+  if (isEmpty())
+  {
+   changeLinkAfterInsFirstItem(p);
+  }
+  else
+  {
+   p->m_pNext = m_pTail->m_pNext;
+   m_pTail->m_pNext = p;
+  }
+ }
+ // 在尾节点之后插入节点
+ void insertTail(const DataType & d)
+ {
+  Item * p = newItem(d);
+  if (isEmpty())
+  {
+   changeLinkAfterInsFirstItem(p);
+  }
+  else
+  {
+   p->m_pNext = m_pTail->m_pNext;
+   m_pTail->m_pNext = p;
+   m_pTail = p;
+  }
+ }
+ // 在指定节点之后插入节点
+ void insertAfter(Item * p, const DataType & d)
+ {
+  if (p == NULL || isEmpty())
+  {
+   return;
+  }
+  if (p == m_pTail)
+  {
+   insertTail(d);
+  }
+  else
+  {
+   Item * pItem = newItem(d, p->m_pNext);
+   p->m_pNext = pItem;
+  }
+ }
+ // 删除头节点
+ void eraseHead()
+ {
+  if (isEmpty())
+  {
+   return;
+  }
+  else if (isOnlyOneItem())
+  {
+   eraseLastOne();
+   return;
+  }
+  Item * pHead = m_pTail->m_pNext;
+  Item * pTemp = pHead->m_pNext; // 头节点的下一个节点
+  delete pHead;
+  m_pTail->m_pNext = pTemp;
+ }
+ // 删除尾节点
+ // pPre[IN]:尾节点的前驱节点，可以为空。如果不为空，在某些情况下可以加快删除速度。
+ void eraseTail(Item * pPre=NULL)
+ {
+  if (isEmpty())
+  {
+   return;
+  }
+  else if (isOnlyOneItem())
+  {
+   eraseLastOne();
+   return;
+  }
+  Item * pItem = (pPre == NULL) ? findPrevItem(m_pTail) : pPre;
+  assert(pItem != NULL);
+  pItem->m_pNext = m_pTail->m_pNext;
+  delete m_pTail;
+  m_pTail = pItem;
+ }
+ // 删除指定节点
+ // p[IN]:要删除的节点
+ // pPre[IN]:p的前驱节点，可以为空。如果不为空，在某些情况下可以加快删除速度。
+ void eraseItem(Item * p, Item * pPre=NULL)
+ {
+  if (p == NULL || isEmpty())
+  {
+   return;
+  }
+  else if (isOnlyOneItem())
+  {
+   if (p != m_pTail)
+   {
+    return;
+   }
+   eraseLastOne();
+   return;
+  }
+  if (p == m_pTail)
+  {
+   eraseTail(pPre);
+  }
+  else if (p == m_pTail->m_pNext)
+  {
+   eraseHead();
+  }
+  else // p是中间节点
+  {
+   Item * pPreItem = (pPre == NULL) ? findPrevItem(p) : pPre;
+   if (pPreItem == NULL)
+   {
+    return;
+   }
+   pPreItem->m_pNext = p->m_pNext;
+   delete p;
+  }
+ }
+ // 从链表头开始，找到第一个数据为d的节点，删除该节点
+ void eraseItem(const DataType & d)
+ {
+  if (isEmpty())
+  {
+   return;
+  }
+  Item * pPreItem = m_pTail;
+  Item * pCurItem = m_pTail->m_pNext;
+  while (pCurItem != m_pTail)
+  {
+   if (pCurItem->m_data == d)
+   {
+    eraseItem(pCurItem, pPreItem);
+    return;
+   }
+   pPreItem = pCurItem;
+   pCurItem = pCurItem->m_pNext;
+  }
+  if (m_pTail->m_data == d)
+  {
+   eraseTail();
+  }
+ }
+ // 删除所有节点
+ void eraseAll()
+ {
+  if (isEmpty())
+  {
+   return;
+  }
+  Item * pCurItem = m_pTail->m_pNext;
+  while (pCurItem != m_pTail)
+  {
+   Item * pTemp = pCurItem->m_pNext;
+   delete pCurItem;
+   pCurItem = pTemp;
+  }
+  delete m_pTail;
+  m_pTail = NULL;
+ }
+ // 获取最后一个节点
+ Item * getTail() const
+ {
+  return m_pTail;
+ }
+ // 判断链表是否为空
+ bool isEmpty() const
+ {
+  return m_pTail == NULL;
+ }
+ // 判断链表是否只有一个节点
+ bool isOnlyOneItem() const
+ {
+  if (isEmpty())
+  {
+   return false;
+  }
+  return m_pTail == m_pTail->m_pNext;
+ }
+ // for debug
+ void dump() const
+ {
+  if (isEmpty())
+  {
+   return;
+  }
+  using std::cout;
+  using std::endl;
+  Item * pCurItem = m_pTail->m_pNext;
+  while (pCurItem != m_pTail)
+  {
+   cout << pCurItem->m_data << ",";
+   pCurItem = pCurItem->m_pNext;
+  }
+  cout << m_pTail->m_data << endl;
+ }
+private:
+ // 新建节点
+ Item * newItem(const DataType & d, Item * pNext=NULL)
+ {
+  return new Item(d, pNext);
+ }
+ // 插入第一个节点时修改链表内部状态的操作
+ void changeLinkAfterInsFirstItem(Item * p)
+ {
+  assert(isEmpty());
+  if (p == NULL)
+  {
+   return;
+  }
+  p->m_pNext = p;
+  m_pTail = p;
+ }
+ // 只有一个节点时，执行删除头节点或尾节点
+ void eraseLastOne()
+ {
+  assert(isOnlyOneItem());
+  delete m_pTail;
+  m_pTail = NULL;
+ }
+ // 找到指定节点的前一个节点
+ Item * findPrevItem(Item * p)
+ {
+  if (p  == NULL)
+  {
+   return NULL;
+  }
+  if (isEmpty())
+  {
+   return NULL;
+  }
+  else if (isOnlyOneItem())
+  {
+   return NULL;
+  }
+  Item * pPreItem = m_pTail;
+  Item * pCurItem = pPreItem->m_pNext;
+  while (pCurItem != m_pTail)
+  {
+   if (pCurItem == p)
+   {
+    return pPreItem;
+   }
+   pPreItem = pCurItem;
+   pCurItem = pCurItem->m_pNext;
+  }
+  if (p == pCurItem) // 此时pCurItem == m_pTail
+  {
+   return pPreItem;
+  }
+  return NULL;
+ }
+ // 将另一个链表的所有节点“拷贝一份”添加到当前链表尾端
+ void copy(const CircularLinkList & rhs)
+ {
+  if (rhs.isEmpty())
+  {
+   return;
+  }
+  Item * pRhsTail = rhs.m_pTail;
+  Item * pRhsCurItem = pRhsTail->m_pNext;
+  while (pRhsCurItem != pRhsTail)
+  {
+   insertTail(pRhsCurItem->m_data);
+   pRhsCurItem = pRhsCurItem->m_pNext;
+  }
+  insertTail(pRhsTail->m_data);
+ }
+private:
+ Item * m_pTail; // 尾节点指针
+};
+#include "LinkList.hpp"
+#include "CircularLinkList.hpp"
+#include "DeLinkList.hpp"
+#include <iostream>
+#include <cstdlib>
+int main()
+{
+  CircularLinkList<int> list;
+  list.insertTail(6);
+  list.insertHead(5);
+  CircularLinkList<int>::Item * pTempTail = list.getTail();
+  list.insertHead(4);
+  list.insertTail(7);
+  list.insertHead(3);
+  list.insertTail(8);
+  list.dump();
+  list.insertAfter(pTempTail, 100);
+  list.insertAfter(pTempTail, 101);
+  list.dump();
+  list.eraseItem(pTempTail);
+  list.dump();
+  CircularLinkList<int> list2;
+  list2.insertHead(14);
+  list2.insertTail(17);
+  list2.insertHead(13);
+  list2.insertTail(18);
+  CircularLinkList<int> list3(list2);
+  list3.dump();
+  CircularLinkList<int> list4;
+  list4 = list3;
+  list4.dump();
+  list.eraseItem(6);
+  list.dump();
+  list.eraseItem(5);
+  list.dump();
+  list.eraseHead();
+  list.dump();
+  list.eraseTail();
+  list.dump();
+  list.eraseAll();
+  list.dump();
+  system("pause");
+  return 0;
+}
+#endif // CIRCULARLINKLIST_HPP_
