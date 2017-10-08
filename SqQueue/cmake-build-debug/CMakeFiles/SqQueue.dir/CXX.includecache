@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jaime/CLionProject/SqQueue/SqQueue.h
+iostream
+-
+
+/home/jaime/CLionProject/SqQueue/main.cpp
+iostream
+-
+SqQueue.h
+/home/jaime/CLionProject/SqQueue/SqQueue.h
+
