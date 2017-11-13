@@ -19,21 +19,14 @@ void InitList(List &L) {
     L->length = 0;
 }
 void Input(List &L) {
-    //if (!L) return ERROR;
+	cin>>L->length;
 	List r=L;
-    while (1) {
+    for(int i=0;i<L->length;i++){
     	List p=new Node;
         scanf("%s%s%f", p->num, p->name, &p->price);
-        if (p->num[0] == '0'&&p->name[0] == '0'&&p->price == 0) {
-            break;
-        }
-        else {
-            p->next=NULL;
-            r->next=p;
-            r=p;
-            L->length++;
-            L->flag=false;
-        }
+        p->next=NULL;
+        r->next=p;
+        r=p;
     }
 }
 int sum=0;

@@ -1,0 +1,10 @@
+﻿  stdafx.cpp
+  实验三.cpp
+d:\data-structure-practice\实验三\实验三\实验三.cpp(79): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: 参见“strcpy”的声明
+d:\data-structure-practice\实验三\实验三\实验三.cpp(84): warning C4018: “<”: 有符号/无符号不匹配
+d:\data-structure-practice\实验三\实验三\实验三.cpp(88): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(93): note: 参见“strcat”的声明
+d:\data-structure-practice\实验三\实验三\实验三.cpp(148): warning C4101: “num”: 未引用的局部变量
+  实验三.vcxproj -> D:\Data-Structure-Practice\实验三\Debug\实验三.exe
+  实验三.vcxproj -> D:\Data-Structure-Practice\实验三\Debug\实验三.pdb (Partial PDB)

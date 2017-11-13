@@ -31,7 +31,7 @@ void Input(List &L) {
     }
 }
 void Print(List L) {
-    printf("%d\n", L->length);
+    //printf("%d\n", L->length);
     while (L->next!=NULL){
 		L = L->next;
         printf("%s %s %.2f\n", L->num, L->name,L->price);
@@ -45,7 +45,7 @@ Status Insert(List &L){
 	int i=0;
 	List t=new Node;
 	scanf("%s%s%f", t->num, t->name, &t->price);
-	while(p->no<index)
+	while(p->no<index-1)
 		p=p->next;
 	t->next=p->next;
 	p->next=t;

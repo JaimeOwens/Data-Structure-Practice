@@ -21,17 +21,13 @@ void InitList(List &L) {
 	L->length = 0;
 }
 void Print(List L) {
-	//if (!L) return ERROR;
-	printf("%d\n", L->length);
 	while (L->next != NULL) {
 		L = L->next;
-		//printf("%s %s %.2f\n", L->num, L->name, L->price);	
 		cout<<L->num<<' '<<L->name<<' ';
 		printf("%.2f\n",L->price);
 	}
 }
 void Input(List &L) {
-	//if (!L) return ERROR;
 	List r=L;
     while (1) {
     	List p=new Node;
@@ -54,7 +50,6 @@ float Average(List L){
 		L=L->next;
 		aver+=L->price;
 		sum++;
-		cout<<aver<<' '<<sum<<endl;
 	}	
 	aver/=(sum*1.0);
 	return aver;
@@ -69,6 +64,7 @@ Status Change(List &L){
 		else 
 			p->price*=1.2;
 	}
+	printf("%.2lf\n",aver);
 }
 
 int main() {

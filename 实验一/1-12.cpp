@@ -56,8 +56,6 @@ Status Sort(List &L){
 	return OK;
 } 
 void Print(List L) {
-	//if (!L) return ERROR;
-	printf("%d\n", L->length);
 	while (L->next != NULL) {
 		L = L->next;
 		//printf("%s %s %.2f\n", L->num, L->name, L->price);	
@@ -71,7 +69,6 @@ int main() {
 	Input(L);
 	Sort(L);
 	Print(L);
-	system("pause");
 	return 0;
 }
 

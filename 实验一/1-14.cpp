@@ -18,27 +18,21 @@ void InitList(List &L) {
     L->length = 0;
 }
 void Print(List L) {
-    printf("%d\n", L->length);
+    //printf("%d\n", L->length);
     while (L->next!=NULL){
 		L = L->next;
         printf("%s %s %.2f\n", L->num, L->name, L->price);
 	}
 }
 void Input(List &L) {
-    //if (!L) return ERROR;
+	cin>>L->length;
 	List r=L;
-    while (1) {
+    for(int i=0;i<L->length;i++){
     	List p=new Node;
         scanf("%s%s%f", p->num, p->name, &p->price);
-        if (p->num[0] == '0'&&p->name[0] == '0'&&p->price == 0) {
-            break;
-        }
-        else {
-            p->next=NULL;
-            r->next=p;
-            r=p;
-            L->length++;
-        }
+        p->next=NULL;
+        r->next=p;
+        r=p;
     }
 }
 void Reverse(List &L){
@@ -49,9 +43,6 @@ void Reverse(List &L){
 		p->next=L->next;
 		L->next=p;
 		p=q;
-		Print(L);
-		//cout<<p->next->num;
-		cout<<endl;
 	}
 }
 int main() {

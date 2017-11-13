@@ -9,7 +9,7 @@ typedef struct Node {
 	char name[50];
     char num[20];
     float price;
-	int no;
+	//int no;
     int length;
     struct Node *next;
 }Node, *List;
@@ -24,14 +24,14 @@ void Input(List &L) {
     for(int i=1;i<=L->length;i++){
     	List p=new Node;
         scanf("%s%s%f", p->num, p->name, &p->price);
-        p->no=i;
+        //p->no=i;
         p->next=NULL;
     	r->next=p;
         r=p;
     }
 }
 void Print(List L) {
-    printf("%d\n", L->length);
+    //printf("%d\n", L->length);
     while (L->next!=NULL){
 		L = L->next;
         printf("%s %s %.2f\n", L->num, L->name,L->price);
@@ -41,10 +41,12 @@ Status Delete(List &L){
 	int index;
 	cin>>index;
 	List p=L;
-	if(index<1||index>(L->length+1)||!p) return ERROR;	
-	while(p->no<index-1)
+	int j=0;
+	while(p->next&&j<index-1){
 		p=p->next;
-	
+		j++;
+	}
+	if(!p->next||(j>index-1)) return ERROR;	
 	List q=p->next;
 	p->next=q->next;
 	delete q;

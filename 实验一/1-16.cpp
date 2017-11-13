@@ -16,38 +16,46 @@ void InitList(List &L) {
     L = new Node;
     L->next = NULL;
 }
+void Print(List L) {
+    while (L!=NULL){
+		L = L->next;
+        cout<<L->num<<' '<<L->name<<' '<<L->price<<endl;
+	}
+	cout<<endl;
+}
 void Input(List &L) {
-    //if (!L) return ERROR;
-	List r=L;
 	int n;
 	cin>>n;
-	while(n--){
+	List r=L;
+    for(int i=0;i<n;i++){
     	List p=new Node;
-        //scanf("%s%s%f", p->num, p->name, &p->price);
         cin>>p->num>>p->name>>p->price;
         p->next=NULL;
         r->next=p;
         r=p;
     }
+    Print(L);
 }
 int Find2(List L,string target){
 	int sum=0;
-	//cout<<target<<endl;
-	while(L->next!=NULL){
+	while(L!=NULL){
 		L=L->next;	
 		if(target==L->name){
 			sum++;
 		}
 	}
+	cout<<sum<<endl;
 	return sum;
 }
 void Find(List L){
-	int n;
-	cin>>n;
-	while(n--){
+	system("pause");
+	int m;
+	cin>>m;
+	for(int i=0;i<m;i++){
 		string target;
 		cin>>target;
-		int sum=Find2(L,target);
+		int sum=0;
+		sum=Find2(L,target);
 		if(sum==0){
 			printf("no\n");
 		}
